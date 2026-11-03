@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cmsts8ps3074l"]
+
+[ext_resource type="Texture2D" uid="uid://cyteoa42qqttr" path="res://levels/level_assets/OfficeTileset.png" id="1_ff7pm"]
+[ext_resource type="Script" uid="uid://d008j20klypqk" path="res://levels/blocks.gd" id="2_4l517"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d582h"]
+atlas = ExtResource("1_ff7pm")
+region = Rect2(288, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5dxap"]
+atlas = ExtResource("1_ff7pm")
+region = Rect2(272, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xohwh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d582h")
+}],
+"loop": 1,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5dxap")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_av6w5"]
+size = Vector2(16, 16)
+
+[node name="Block" type="StaticBody2D" unique_id=965479900]
+collision_mask = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1506311089]
+sprite_frames = SubResource("SpriteFrames_xohwh")
+animation = &"empty"
+script = ExtResource("2_4l517")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2147289279]
+shape = SubResource("RectangleShape2D_av6w5")
