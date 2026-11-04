@@ -35,11 +35,11 @@ size = Vector2(16, 16)
 
 [node name="Block" type="StaticBody2D" unique_id=965479900]
 collision_mask = 3
+script = ExtResource("2_4l517")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1506311089]
 sprite_frames = SubResource("SpriteFrames_xohwh")
 animation = &"empty"
-script = ExtResource("2_4l517")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2147289279]
 shape = SubResource("RectangleShape2D_av6w5")

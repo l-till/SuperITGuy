@@ -8,7 +8,7 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5x0yr"]
 texture = ExtResource("2_ep22m")
 17:6/0 = 0
-17:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+17:6/0/custom_data_1 = "block"
 18:6/0 = 0
 18:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:8/0 = 0
@@ -70,6 +70,8 @@ texture = ExtResource("2_ep22m")
 physics_layer_0/collision_layer = 1
 custom_data_layer_0/name = "special"
 custom_data_layer_0/type = 4
+custom_data_layer_1/name = "type"
+custom_data_layer_1/type = 4
 sources/5 = SubResource("TileSetAtlasSource_5x0yr")
 
 [node name="LevelBase" type="Node2D" unique_id=627732271]
@@ -84,8 +86,8 @@ tile_set = SubResource("TileSet_hsoud")
 [node name="Layer2" type="TileMapLayer" parent="." unique_id=1512482852 groups=["tilemap"]]
 tile_set = SubResource("TileSet_hsoud")
 
-[node name="Items" type="TileMap" parent="." unique_id=1153369611]
-format = 2
+[node name="Items" type="TileMapLayer" parent="." unique_id=1292060143 groups=["tilemap"]]
+tile_set = SubResource("TileSet_hsoud")
 
 [node name="Danger" type="TileMap" parent="." unique_id=1675118252 groups=["danger"]]
 format = 2

@@ -3,8 +3,7 @@ class_name Block
 extends StaticBody2D
 
 @export var item_scene: PackedScene
-@export var hits_allowed := 1   # set higher for multi-coin blocks
-
+@export var hits_allowed := 1
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var _bouncing := false
