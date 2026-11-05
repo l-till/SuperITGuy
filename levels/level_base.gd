@@ -7,9 +7,10 @@ signal score_changed
 #
 var score = 0: set = set_score
 var block_scene = load("res://levels/blocks.tscn")
+var floppy_scene = load("res://items/loppy.tscn")
 var item_scenes = {
-	"floppy": load("res://items/coin.tscn"),
-	"cookie": load("res://items/mushroom.tscn"),
+	"floppy": load("res://items/block_floppy.tscn"),
+	"cookie": load("res://items/cookie.tscn"),
 	"life": load("res://items/life.tscn")
 	}
 @onready var camera = $Player/Camera2D
@@ -37,6 +38,11 @@ func spawn_items():
 			if contents == "":
 				contents = "floppy"
 			block.item_scene = item_scenes.get(contents)
+		elif type == "floppy":
+			var floppy = floppy_scene.instantiate()
+			add_child(floppy)
+			floppy.position = $Items.map_to_local(cell)
+			floppy.picked_up.connect(_on_item_picked_up)
 
 # spawn hazards
 #func spawn_dangers():
@@ -57,6 +63,16 @@ func spawn_items():
 func set_score(value):
 	score = value
 	score_changed.emit(score)
+
+#
+func _on_item_picked_up(type):
+	match type:
+		"floppy":
+			score += 1
+		"cookie":
+			pass
+		"life":
+			pass
 
 #
 #func _on_server_entered(body):

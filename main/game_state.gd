@@ -1,9 +1,9 @@
 extends Node
 var num_levels = 1
 var current_level = 0
-var game_scene = "res://Main/main.tscn"
-var title_screen = "res://UI/title.tscn"
-var control_screen = "res://UI/controls.tscn"
+var game_scene = "res://main/main.tscn"
+var title_screen = "res://ui/title.tscn"
+var control_screen = "res://ui/controls.tscn"
 func restart():
 	current_level = 0
 	get_tree().change_scene_to_file(title_screen)

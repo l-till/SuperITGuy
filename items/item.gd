@@ -7,7 +7,7 @@ signal picked_up
 
 # variables
 var textures = {
-	"coin": "res://assets/sprites/cherry.png",
+	"cookie": "res://items/item_assets/cookie.png",
 	"floppy": "res://items/item_assets/Spinning_Floppy_Disk.png"
 }
 

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cfndh8oj03uow"]
+
+[ext_resource type="Script" uid="uid://shxc4fx2rh8v" path="res://items/life.gd" id="1_oeild"]
+[ext_resource type="Texture2D" uid="uid://ddmaq76kpq8k8" path="res://items/item_assets/Life.png" id="2_ovl70"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xohwh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ovl70")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rbyyf"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_276te"]
+radius = 7.0
+
+[node name="Life" type="CharacterBody2D" unique_id=1643589516]
+collision_layer = 9
+collision_mask = 3
+script = ExtResource("1_oeild")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1344096377]
+sprite_frames = SubResource("SpriteFrames_xohwh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=195294108]
+shape = SubResource("CircleShape2D_rbyyf")
+
+[node name="PickupArea" type="Area2D" parent="." unique_id=101744801]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=2042240297]
+shape = SubResource("CircleShape2D_276te")
+
+[connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dvl2xtvp1rj0b"]
+
+[ext_resource type="FontFile" uid="uid://d117vdibr588y" path="res://assets/Kenney Thick.ttf" id="2_0w2wx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_msa35"]
+font = ExtResource("2_0w2wx")
+font_size = 48
+outline_size = 16
+outline_color = Color(0.00101692, 0.000609899, 0.000406428, 1)
+
+[node name="HUD" type="MarginContainer" unique_id=199412858]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1008322508]
+layout_mode = 2
+
+[node name="Score" type="Label" parent="HBoxContainer" unique_id=1022123384]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+label_settings = SubResource("LabelSettings_msa35")
+
+[node name="LifeCounter" type="HBoxContainer" parent="HBoxContainer" unique_id=1140177615]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/LifeCounter" unique_id=211165245]
+layout_mode = 2
+stretch_mode = 5
+
+[node name="LifeLabel" type="Label" parent="HBoxContainer/LifeCounter" unique_id=328316990]
+layout_mode = 2
+text = "3"

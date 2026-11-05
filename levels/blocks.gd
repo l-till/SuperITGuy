@@ -33,6 +33,9 @@ func _bounce() -> void:
 func _spawn_item() -> void:
 	if item_scene == null:
 		return
-	var item := item_scene.instantiate()
-	item.global_position = global_position
+	var item = item_scene.instantiate()
+	item.position = position   # block and item share the level as parent
+	item.picked_up.connect(get_parent()._on_item_picked_up)
 	get_parent().add_child.call_deferred(item)
+	if item.has_method("emerge"):
+		item.emerge.call_deferred()
