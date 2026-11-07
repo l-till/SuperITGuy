@@ -5,6 +5,10 @@ extends CharacterBody2D
 signal life_changed
 signal died
 
+# constants
+const BIG_SCALE = Vector2(1.25, 1.25)
+@onready var sprite_base_pos = $Spite2D.position
+@onready var shape_base_pos = $CollisionShape2D.position
 
 # export variables
 @export var gravity = 750
@@ -12,7 +16,6 @@ signal died
 @export var jump_speed = -300
 @export var max_jumps = 1
 @export var double_jump_factor = 1.5
-@export var climb_speed = 50
 
 
 # enums and variables
@@ -20,7 +23,9 @@ enum {IDLE, RUN, JUMP, HURT, DEAD, CLIMB}
 var state = IDLE
 var life = 3: set = set_life
 var jump_count = 0
-var is_on_ladder = false
+var is_dead = false
+var invincible = false
+
 
 # sets the players life
 func set_life(value):
@@ -58,14 +63,12 @@ func change_state(new_state):
 		DEAD:
 			died.emit()
 			hide()
-		CLIMB:
-			$AnimationPlayer.play("climb")
 
 
 #
 func get_input():
 	# no movement if hurt
-	if state == HURT:
+	if state == DEAD:
 		return
 	
 	# gets input
@@ -75,21 +78,6 @@ func get_input():
 	var up = Input.is_action_pressed("up")
 	var down = Input.is_action_pressed("down")
 	
-	# climbing
-	if up and state != CLIMB and is_on_ladder:
-		change_state(CLIMB)
-	if state == CLIMB:
-		if up:
-			velocity.y = -climb_speed
-			$AnimationPlayer.play("climb")
-		elif down:
-			velocity.y = climb_speed
-			$AnimationPlayer.play("climb")
-		else:
-			velocity.y = 0
-			$AnimationPlayer.stop()
-	if state == CLIMB and not is_on_ladder:
-		change_state(IDLE)
 	
 	# movement occurs in all states
 	velocity.x = 0
@@ -137,15 +125,14 @@ func _check_block_hits() -> void:
 
 #
 func _physics_process(delta):
-	if state != CLIMB:
-		velocity.y += gravity * delta
+	velocity.y += gravity * delta
 	get_input()
 	#
 	move_and_slide()
 	#
 	_check_block_hits()
 	#
-	if state == HURT:
+	if state == DEAD:
 		return
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -165,17 +152,64 @@ func _physics_process(delta):
 	if state == JUMP and velocity.y > 0:
 		$AnimationPlayer.play("jump_down")
 
+# Grow with cookie
+func grow():
+	if GameState.is_big:
+		return
+	GameState.is_big = true
+	_apply_size()
+
+# Shrink if hurt
+func shrink():
+	GameState.is_big = false
+	_apply_size()
+	_start_invincibility()
 
 # resets the game
-func reset(_position):
-	position = _position
-	show()
-	change_state(IDLE)
-	life = 3
+func reset(pos):
+	position = pos
+	is_dead = false
+	_apply_size()
 
+# Brief invicibility after getting hurt
+func _start_invincibility():
+	invincible = true
+	var tween = create_tween().set_loops(10)
+	tween.tween_property($Sprite2D, "modulate:a", 0.3, 0.1)
+	tween.tween_property($Sprite2D, "modulate:a", 1.0, 0.1)
+	await tween.finished
+	$Sprite2D.modulate.a = 1.0
+	invincible = false
+
+# sets size
+func _apply_size(animate := true):
+	var s = BIG_SCALE if GameState.is_big else Vector2.ONE
+	if animate:
+		var tween = create_tween().set_parallel(true)
+		tween.tween_property($Sprite2D, "scale", s, 0.15)
+		tween.tween_property($Sprite2D, "position", sprite_base_pos * s, 0.15)
+		tween.tween_property($CollisionShape2D, "scale", s, 0.15)
+		tween.tween_property($CollisionShape2D, "position", shape_base_pos * s, 0.15)
+	else:
+		$Sprite2D.scale = s
+		$Sprite2D.position = sprite_base_pos * s
+		$CollisionShape2D.scale = s
+		$CollisionShape2D.position = shape_base_pos * s
 
 # player hurt
 func hurt():
-	if state != HURT:
-		change_state(HURT)
-		$HurtSound.play()
+	if invincible or is_dead:
+		return
+	if GameState.is_big:
+		shrink()
+	else:
+		die()
+
+func die():
+	if is_dead:
+		return
+	is_dead = true
+	set_physics_process(false)
+	$CollisionShape2D.set_deferred("disabled", true)
+	await get_tree().create_timer(1.0).timeout
+	died.emit()

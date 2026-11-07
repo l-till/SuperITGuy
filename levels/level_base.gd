@@ -70,9 +70,9 @@ func _on_item_picked_up(type):
 		"floppy":
 			score += 1
 		"cookie":
-			pass
+			$Player.grow()
 		"life":
-			pass
+			GameState.lives += 1
 
 #
 #func _on_server_entered(body):
@@ -82,4 +82,8 @@ func _on_item_picked_up(type):
 
 #
 func _on_player_died():
-	get_tree().reload_current_scene()
+	GameState.lose_life()
+
+func _on_kill_zone_body_entered(body):
+	if body.is_in_group("player"):
+		body.die()

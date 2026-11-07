@@ -21,8 +21,7 @@ radius = 7.0
 radius = 7.0
 
 [node name="Life" type="CharacterBody2D" unique_id=1643589516]
-collision_layer = 9
-collision_mask = 3
+collision_layer = 8
 script = ExtResource("1_oeild")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1344096377]
@@ -32,6 +31,8 @@ sprite_frames = SubResource("SpriteFrames_xohwh")
 shape = SubResource("CircleShape2D_rbyyf")
 
 [node name="PickupArea" type="Area2D" parent="." unique_id=101744801]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=2042240297]
 shape = SubResource("CircleShape2D_276te")

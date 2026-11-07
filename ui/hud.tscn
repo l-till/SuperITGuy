@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dvl2xtvp1rj0b"]
 
 [ext_resource type="FontFile" uid="uid://d117vdibr588y" path="res://assets/Kenney Thick.ttf" id="2_0w2wx"]
+[ext_resource type="Texture2D" uid="uid://ddmaq76kpq8k8" path="res://items/item_assets/Life.png" id="2_276te"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_msa35"]
 font = ExtResource("2_0w2wx")
@@ -31,6 +32,7 @@ layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer/LifeCounter" unique_id=211165245]
 layout_mode = 2
+texture = ExtResource("2_276te")
 stretch_mode = 5
 
 [node name="LifeLabel" type="Label" parent="HBoxContainer/LifeCounter" unique_id=328316990]

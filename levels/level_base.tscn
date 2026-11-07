@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cuio515dxmjcv" path="res://levels/level_base.gd" id="1_da5si"]
 [ext_resource type="Texture2D" uid="uid://cyteoa42qqttr" path="res://levels/level_assets/OfficeTileset.png" id="2_ep22m"]
 [ext_resource type="PackedScene" uid="uid://c8e1ro7f1laj5" path="res://player/player.tscn" id="3_ts4ud"]
+[ext_resource type="PackedScene" uid="uid://dvl2xtvp1rj0b" path="res://ui/hud.tscn" id="4_ep22m"]
 [ext_resource type="AudioStream" uid="uid://cxh13ybsqc6os" path="res://assets/audio/850263__loudkevin__ocean-185bpmloop.mp3" id="4_jd1fy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5x0yr"]
@@ -110,6 +111,8 @@ position = Vector2(556, 252)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=98094152]
 
+[node name="HUD" parent="CanvasLayer" unique_id=199412858 instance=ExtResource("4_ep22m")]
+
 [node name="GameMusic" type="AudioStreamPlayer" parent="." unique_id=672824104]
 stream = ExtResource("4_jd1fy")
 autoplay = true
@@ -121,5 +124,8 @@ collision_mask = 2
 
 [node name="AllBounds" type="Node2D" parent="." unique_id=763481569]
 
+[node name="KillZone" type="Area2D" parent="." unique_id=1328392638]
+
 [connection signal="body_entered" from="Ladders" to="." method="_on_ladders_body_entered"]
 [connection signal="body_exited" from="Ladders" to="." method="_on_ladders_body_exited"]
+[connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
