@@ -31,11 +31,16 @@ window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
+[editor]
+
+movie_writer/movie_file="/home/logan/Documents/Game Recordings/SuperITGuy.ogv"
+
 [global_group]
 
 danger=""
 tilemap=""
 player=""
+enemies=""
 
 [input]
 

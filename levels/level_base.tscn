@@ -76,6 +76,8 @@ texture = ExtResource("2_ep22m")
 21:9/0 = 0
 18:9/0 = 0
 18:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:11/size_in_atlas = Vector2i(3, 1)
+14:11/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_hsoud"]
 physics_layer_0/collision_layer = 1
@@ -125,7 +127,19 @@ collision_mask = 2
 [node name="AllBounds" type="Node2D" parent="." unique_id=763481569]
 
 [node name="KillZone" type="Area2D" parent="." unique_id=1328392638]
+collision_layer = 0
+collision_mask = 2
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=1664683929]
+
+[node name="Goal" type="Area2D" parent="." unique_id=1549691577]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal" unique_id=846042737]
+
+[connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="body_entered" from="Ladders" to="." method="_on_ladders_body_entered"]
 [connection signal="body_exited" from="Ladders" to="." method="_on_ladders_body_exited"]
 [connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]

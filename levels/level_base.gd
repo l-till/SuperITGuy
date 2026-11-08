@@ -7,7 +7,7 @@ signal score_changed
 #
 var score = 0: set = set_score
 var block_scene = load("res://levels/blocks.tscn")
-var floppy_scene = load("res://items/loppy.tscn")
+var floppy_scene = load("res://items/floppy.tscn")
 var item_scenes = {
 	"floppy": load("res://items/block_floppy.tscn"),
 	"cookie": load("res://items/cookie.tscn"),
@@ -23,6 +23,8 @@ func _ready():
 	spawn_items()
 #	spawn_dangers()
 	var rt = $Player/RemoteTransform2D
+	score_changed.connect($CanvasLayer/HUD.update_score)
+	$CanvasLayer/HUD.update_score(score)
 
 #
 func spawn_items():
@@ -87,3 +89,10 @@ func _on_player_died():
 func _on_kill_zone_body_entered(body):
 	if body.is_in_group("player"):
 		body.die()
+
+func _on_goal_body_entered(body):
+	if body.is_in_group("player"):
+		$Goal/CollisionShape2D.set_deferred("disabled", true)
+		body.set_physics_process(false)
+		await get_tree().create_timer(.5).timeout
+		GameState.next_level()

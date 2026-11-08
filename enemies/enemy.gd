@@ -1,3 +1,4 @@
+# enemy.gd
 extends CharacterBody2D
 
 
@@ -7,35 +8,34 @@ extends CharacterBody2D
 
 
 #
-var facing = 1
+var facing = -1
+var dead = false
 
 
 #
 func _physics_process(delta):
 	velocity.y += gravity * delta
 	velocity.x = facing * speed
-	$Sprite2D.flip_h = velocity.x > 0
+	$AnimatedSprite2D.flip_h = velocity.x > 0
 	move_and_slide()
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider().name == "Player":
-			collision.get_collider().hurt()
-		if collision.get_normal().x != 0:
-			facing = sign(collision.get_normal().x)
-			velocity.y = -100
+	if is_on_wall():
+		facing = sign(get_wall_normal().x)
 	if position.y > 10000:
 		queue_free()
 
 
 #
 func take_damage():
-	$AnimationPlayer.play("death")
+	if dead:
+		return
+	dead = true
+	$AnimatedSprite2D.play("death")
 	$EnemyHitSound.play()
 	$CollisionShape2D.set_deferred("disabled", true)
 	set_physics_process(false)
 
 
 #
-func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "death":
+func _on_animated_sprite_2d_animation_finished(anim_name):
+	if $AnimatedSprite2D.animation == "death":
 		queue_free()

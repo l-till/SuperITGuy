@@ -7,7 +7,7 @@ signal died
 
 # constants
 const BIG_SCALE = Vector2(1.25, 1.25)
-@onready var sprite_base_pos = $Spite2D.position
+@onready var sprite_base_pos = $Sprite2D.position
 @onready var shape_base_pos = $CollisionShape2D.position
 
 # export variables
@@ -139,7 +139,7 @@ func _physics_process(delta):
 		if collision.get_collider().is_in_group("danger"):
 			hurt()
 		if collision.get_collider().is_in_group("enemies"):
-			if position.y < collision.get_collider().position.y:
+			if collision.get_normal().y < -0.7:
 				collision.get_collider().take_damage()
 				velocity.y = -200
 			else:
@@ -200,6 +200,7 @@ func _apply_size(animate := true):
 func hurt():
 	if invincible or is_dead:
 		return
+	invincible = true
 	if GameState.is_big:
 		shrink()
 	else:
@@ -208,8 +209,4 @@ func hurt():
 func die():
 	if is_dead:
 		return
-	is_dead = true
-	set_physics_process(false)
-	$CollisionShape2D.set_deferred("disabled", true)
-	await get_tree().create_timer(1.0).timeout
-	died.emit()
+	change_state(DEAD)

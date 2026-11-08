@@ -2,7 +2,7 @@ extends MarginContainer
 
 
 #
-@onready var life_label = $HUD/HBoxContainer/LifeCounter/LifeLabel
+@onready var life_label = $HBoxContainer/LifeCounter/LifeLabel
 
 func _ready():
 	GameState.lives_changed.connect(update_life)

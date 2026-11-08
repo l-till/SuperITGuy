@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cyeyyhjfeoynb"]
+
+[ext_resource type="Script" uid="uid://xh51pv6l4q1r" path="res://ui/win.gd" id="1_ya36f"]
+
+[node name="Win" type="Control" unique_id=1456160704]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ya36f")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1768204673]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1616679082]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1112768280]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=355899819]
+layout_mode = 2
+text = "Well Done! 
+You have restored the servers!
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer" unique_id=111237757]
+layout_mode = 2
+text = "
+Press any key to continue"
+horizontal_alignment = 1
+vertical_alignment = 2

@@ -13,7 +13,9 @@ var current_level = 0
 var game_scene = "res://main/main.tscn"
 var title_screen = "res://ui/title.tscn"
 var control_screen = "res://ui/controls.tscn"
-var game_over_screen = "res://main/game_over.tscn"
+var intro_screen = "res://ui/intro.tscn"
+var game_over_screen = "res://ui/game_over.tscn"
+var win_screen = "res://ui/win.tscn"
 var lives = START_LIVES: set = set_lives
 var is_big = false
 
@@ -42,9 +44,9 @@ func restart():
 func next_level():
 	current_level += 1
 	if current_level <= num_levels:
-		get_tree().change_scene_to_file(game_scene)
+		get_tree().change_scene_to_file.call_deferred(intro_screen)
 	else:
-		restart()
+		get_tree().change_scene_to_file.call_deferred(win_screen)
 
 #
 func show_controls():

@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://uwc4mbjab35q"]
 
 [ext_resource type="Script" uid="uid://cak5vpn232c6x" path="res://ui/title.gd" id="1_r080e"]
+[ext_resource type="Texture2D" uid="uid://b2gu5qsi4stj0" path="res://assets/Retro Pixel-Art IT Server Room.png" id="2_8lx1x"]
 [ext_resource type="FontFile" uid="uid://d117vdibr588y" path="res://assets/Kenney Thick.ttf" id="3_w56uq"]
 [ext_resource type="AudioStream" uid="uid://b8udxvurnlmw3" path="res://assets/audio/852701__logicmoon__neon-bleed.wav" id="5_p8fhk"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jgd3k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vrw70"]
 font = ExtResource("3_w56uq")
@@ -81,14 +80,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -190.0
-offset_top = -9.0
-offset_right = 764.0
-offset_bottom = 308.0
+offset_left = -44.000015
+offset_top = 1.9999981
+offset_right = 710.28564
+offset_bottom = 174.85706
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.7, 0.7)
-texture = SubResource("CompressedTexture2D_jgd3k")
+texture = ExtResource("2_8lx1x")
 stretch_mode = 6
 
 [node name="Title" type="Label" parent="." unique_id=87225482]

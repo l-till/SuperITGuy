@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://m14eqliev7ve"]
+
+[ext_resource type="Script" uid="uid://cu30tdgw0fr4u" path="res://ui/intro.gd" id="1_1cctr"]
+[ext_resource type="FontFile" uid="uid://d117vdibr588y" path="res://assets/Kenney Thick.ttf" id="2_8k8jw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_av6w5"]
+font = ExtResource("2_8k8jw")
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_65f5o"]
+font = ExtResource("2_8k8jw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_xohwh"]
+font = ExtResource("2_8k8jw")
+
+[node name="Intro" type="Control" unique_id=710488552]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1cctr")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1590684972]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label2" type="Label" parent="." unique_id=383490716]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.264
+anchor_top = 0.26900002
+anchor_right = 0.75600004
+anchor_bottom = 0.57500005
+offset_left = 0.040008545
+offset_top = 0.1599884
+offset_right = 0.15997314
+offset_bottom = -1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+text = "Viruses have infected the servers!
+ You need to collect as many floppy disk backups as you can to restore the server."
+label_settings = SubResource("LabelSettings_av6w5")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1542784347]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1957472576]
+visible = false
+layout_mode = 2
+
+[node name="WorldLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1625301238]
+visible = false
+layout_mode = 2
+label_settings = SubResource("LabelSettings_65f5o")
+horizontal_alignment = 1
+
+[node name="LivesLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=473149302]
+visible = false
+layout_mode = 2
+label_settings = SubResource("LabelSettings_xohwh")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="." unique_id=1775086930]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -56.0
+offset_right = 93.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press Space to Continue"

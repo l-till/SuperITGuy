@@ -163,6 +163,7 @@ colors = PackedColorArray(0.53887, 0.543259, 0.592151, 1, 0.882709, 0.885495, 0.
 
 [node name="Player" type="CharacterBody2D" unique_id=1100637755 groups=["player"]]
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_yrjy7")
 gravity = 725
 jump_speed = -325
